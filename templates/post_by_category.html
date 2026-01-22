@@ -1,0 +1,38 @@
+{% extends "components/base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Category Post-->
+<h3 class="text-uppercase text-warning" style="letter-spacing: 2px">
+  Category: {{ category }}
+</h3>
+
+<div class="row mb-2">
+  {% if posts %}
+    {% for post in posts %}
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h3>{{ post.title }}</h3>
+            <small class="mb-1 text-muted">
+              {{ post.created_at | timesince }} | {{ post.author }}
+            </small>
+            <p class="card-text">{{ post.short_description | truncatewords:20 }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-12">
+      <div class="alert alert-warning text-center py-5" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-exclamation-circle mb-3" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm.93-10.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.533-.293l.07-.33 1-4.705c.07-.34-.03-.533-.304-.533-.194 0-.488.07-.533.293l-.07.33zm-2.29 6.905c0 .533.36.888.857.888.497 0 .857-.355.857-.888 0-.532-.36-.887-.857-.887-.497 0-.857.355-.857.887z"/>
+        </svg>
+        <h4 class="mt-2">Oops! No posts found.</h4>
+        <p>Check back later or explore other categories.</p>
+        <a href="{% url 'home' %}" class="btn btn-warning mt-2">Back to Home</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
