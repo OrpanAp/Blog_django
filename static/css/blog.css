@@ -88,3 +88,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+@media (max-width: 576px) {
+  .category-table thead {
+    display: none;
+  }
+
+  .category-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .category-table td,
+  .category-table th {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: none;
+  }
+
+  .category-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #666;
+  }
+}
+

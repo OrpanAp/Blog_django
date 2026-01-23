@@ -11,10 +11,10 @@
         <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a>
         &nbsp;
         <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
-      {% else %}  
-        <span>{{ user }}</span>
-        &emsp;
-        <a class="btn btn-sm btn-warning" href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a class="btn btn-sm btn-primary" href="{% url 'dashboard' %}">Dashboard</a>
+        &nbsp;
+        <a class="btn btn-sm btn-danger" href="{% url 'logout' %}">Logout</a>
       {% endif %}
     </div>
   </div>

@@ -59,7 +59,7 @@ def login(request):
                 auth.login(request, user)
                 
                 messages.success(request, f"👋 Welcome back, {user.username}!")
-                return redirect('home')
+                return redirect('dashboard')
             else:
                 messages.error(request, "❌ Invalid username or password.")
 

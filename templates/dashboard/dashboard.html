@@ -1,0 +1,32 @@
+{% extends "components/base.html" %} {% block title %}Dashboard{% endblock %} 
+{% block content %}
+    <div class="row">
+        <!--Left panel-->
+        
+        {% include "dashboard/components/side_nav.html" %}
+
+        <!--Right panel-->
+        <div class="col-md-9">
+            <span>User: <strong>{{ user }}</strong></span>
+            <div class="row">
+                <div class="col">
+                    <div class="card border-default mb-3">
+                        <div class="card-header font-weight-bold text-uppercase text-center">All Categories</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title text-center">{{ categories_count }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card border-default mb-3">
+                        <div class="card-header font-weight-bold text-uppercase text-center">All Posts</div>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title text-center">{{ blogs_count }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 
