@@ -7,7 +7,7 @@
   style="background-image: url('{{ featured_post.featured_image.url }}');background-blend-mode: overlay;background-size:cover;"
 >
   <div class="col-md-8 px-0">
-    <h1 class="display-4 font-italic"><a href="{% url 'blogs' featured_post.slug %}" class='text-dark'>{{ featured_post.title }}</a></h1>
+    <h1 class="display-4 font-italic"><a href="{% url 'blogs' featured_post.slug %}" class='text-light'>{{ featured_post.title }}</a></h1>
     <p class="lead my-3">
       {{ featured_post.short_description | truncatewords:20 }}
     </p>

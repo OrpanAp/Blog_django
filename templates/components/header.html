@@ -4,12 +4,40 @@
       <a class="blog-header-logo text-dark" href="/">Django Blog</a>
     </div>
     <div class="col-4">
-      {% include "components/search.html" %}
+      {% comment %} {% include "components/search.html" %} {% endcomment %}
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
-      <a class="btn btn-sm btn-warning" href="#">Login</a>
-      &nbsp;
-      <a class="btn btn-sm btn-outline-secondary" href="#">Register</a>
+      {% if not user.is_authenticated %}
+        <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a>
+        &nbsp;
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
+      {% else %}  
+        <span>{{ user }}</span>
+        &emsp;
+        <a class="btn btn-sm btn-warning" href="{% url 'logout' %}">Logout</a>
+      {% endif %}
     </div>
   </div>
 </header>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="floating-alert alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll(".floating-alert").forEach(alert => {
+        alert.style.transition = "opacity 0.4s, transform 0.4s";
+        alert.style.opacity = 0;
+        alert.style.transform = "translateY(-20px)";
+        setTimeout(() => alert.remove(), 400);
+      });
+    }, 3000);
+  </script>
+{% endif %}
+
+
+

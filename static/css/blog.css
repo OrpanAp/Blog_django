@@ -67,3 +67,24 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+.floating-alert {
+  position: fixed;       /* float above everything */
+  top: 20px;             /* distance from top of viewport */
+  left: 50%;             /* center horizontally */
+  transform: translateX(-50%);
+  z-index: 9999;         /* make sure it’s above header/content */
+  
+  min-width: 300px;
+  max-width: 90%;
+  padding: 12px 20px;
+
+  text-align: center;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+  margin: 0 !important;  /* remove any spacing */
+  pointer-events: none;   /* optional: clicks pass through */
+}
+
+
