@@ -1,0 +1,65 @@
+{% extends "components/base.html" %} {% block title %}Blogs{% endblock %} 
+{% block content %}
+    <!-- Page content-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-3">
+                        ← Back to Home
+                    </a>
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{ blog.title }}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">Posted on {{ blog.create_at }} by {{ blog.author }}</div>
+                    <!-- Post category-->
+                    <a class="badge bg-primary text-decoration-none text-light" href="{% url 'post_by_category' blog.category.id %}">{{ blog.category }}</a>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{ blog.featured_image.url }}" alt="{{ blog.featured_image.url }}" /></figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{ blog.short_description }}</p>
+                    <p class="fs-5 mb-4">{{ blog.blog_body }}</p>
+                </section>
+            </article>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            {% include "components/search_widget.html" %}
+            <!-- Categories widget-->
+            <div class="card mb-4 p-3">
+                <h4 class="font-italic">Categories</h4>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                {% if categories %}
+                                    {% for cat in categories %}
+                                        <li><a href="{% url 'post_by_category' cat.id %}">{{ cat }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side widget-->
+            {% if socialConnects %}
+                <div class="card mb-4 p-3">
+                    <h4 class="font-italic">Follow Us</h4>
+                    <ol class="list-unstyled">
+                        {% for link in socialConnects %}
+                            <li><a href="{{ link.link }}">{{ link.platform }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

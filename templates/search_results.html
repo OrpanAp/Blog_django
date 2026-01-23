@@ -1,17 +1,17 @@
 {% extends "components/base.html" %}
-{% block title %}Post by category{% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block content %}
 
 <!-- Category Post-->
 <h3 class="text-uppercase text-warning" style="letter-spacing: 2px">
-  Category: {{ category }}
+  Results: {{ search_term }}
 </h3>
 
 <div class="row mb-2">
   
-  {% if posts %}
-    {% for post in posts %}
+  {% if results %}
+    {% for post in results %}
       <div class="col-md-6 mb-3">
         <div class="card border-0 shadow-sm">
           <div class="card-body">
@@ -31,17 +31,16 @@
           <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm.93-10.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.533-.293l.07-.33 1-4.705c.07-.34-.03-.533-.304-.533-.194 0-.488.07-.533.293l-.07.33zm-2.29 6.905c0 .533.36.888.857.888.497 0 .857-.355.857-.888 0-.532-.36-.887-.857-.887-.497 0-.857.355-.857.887z"/>
         </svg>
         <h4 class="mt-2">Oops! No posts found.</h4>
-        <p>Check back later or explore other categories.</p>
+        <p>Check back later or explore other blogs.</p>
         <a href="{% url 'home' %}" class="btn btn-warning mt-2">Back to Home</a>
       </div>
     </div>
   {% endif %}
+
 </div>
-
-
-{% if posts %}
-  <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-3">
-      ← Back to Home
-  </a>
+{% if results %}
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-3">
+        ← Back to Home
+    </a>
 {% endif %}
 {% endblock %}
