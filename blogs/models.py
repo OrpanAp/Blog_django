@@ -27,7 +27,7 @@ STATUS_CHOICES = (
 )
 
 class Blogs(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=150, unique=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -45,3 +45,9 @@ class Blogs(models.Model):
 
     class Meta:
         verbose_name_plural = 'blogs'
+
+    # Capitalize first letter
+    def save(self, *args, **kwargs):
+        if self.title:
+            self.title = self.title.title()
+        super().save(*args, **kwargs)
