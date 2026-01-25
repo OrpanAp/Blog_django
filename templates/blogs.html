@@ -24,7 +24,49 @@
                 <section class="mb-5">
                     <p class="fs-5 mb-4">{{ blog.short_description }}</p>
                     <p class="fs-5 mb-4">{{ blog.blog_body }}</p>
-                </section>
+
+                    <!--comments-->
+                    <h5>Comments ({{ comment_count }}):</h5>
+
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text mb-0">{{ comment }}</p>
+                                    <span>
+                                        <small>By {{ comment.user }}</small>
+                                        <small> | {{ comment.created_at | timesince }}</small>
+                                    </span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">No comment found</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                        <br>
+
+                        <div class="form-group">
+                            {% if user.is_authenticated %}
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class='form-control' name="comment" placeholder='Write your comments here....'></textarea>
+                                    <button type="submit" class='btn btn-primary mt-2'>Submit</button>
+                                </div>
+                            </form>
+                            {% else %}
+                            <p>Please 
+                                <span><a href="{% url 'login' %}">Login</a></span>
+                                to Comment.</p>
+                            {% endif %}
+                        </div>
+                        
+                    </section>
             </article>
         </div>
         <!-- Side widgets-->

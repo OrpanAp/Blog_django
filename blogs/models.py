@@ -51,3 +51,17 @@ class Blogs(models.Model):
         if self.title:
             self.title = self.title.title()
         super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blogs, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.comment
+    
+    class Meta:
+        verbose_name_plural = 'comments'
