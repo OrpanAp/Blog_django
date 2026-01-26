@@ -1,0 +1,91 @@
+{% extends "components/base.html" %} {% block title %}Users{% endblock %} 
+{% block content %}
+
+<div class="row">
+    <!--Left panel-->
+    
+    {% include "dashboard/components/side_nav.html" %}
+    
+    <!--Right panel-->
+    <div class="col-md-9">
+            {% if perms.auth.view_user %}
+                <span>User: <strong>{{ user }}</strong></span>
+
+                <h5 class='mt-3'>All Users</h5>
+                <a href="{% url 'add_users' %}" class="btn btn-success text-light float-right mb-2">Add New</a>
+
+                <div class="table-responsive">
+                    <table class="table table-light table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th>Staff</th>
+                            <th>Superuser</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users|dictsort:"id"  %}
+                                <tr>
+                                    <th scope="row" data-label="#">{{ forloop.counter }}</th>
+                                    <td data-label="Name">{{ user.first_name }} {{ user.last_name }}</td>
+                                    <td data-label="Username">{{ user.username }}</td>
+                                    <td data-label="Email">{{ user.email }}</td>
+                                    <td data-label="Active">
+                                        {% if user.is_active %}
+                                            <i class="fa fa-check text-success"></i>
+                                        {% else %}
+                                            <i class="fa fa-times text-danger"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td data-label="Staff">
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check text-success"></i>
+                                        {% else %}
+                                            <i class="fa fa-times text-danger"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td data-label="Superuser">
+                                        {% if user.is_superuser %}
+                                            <i class="fa fa-check text-success"></i>
+                                        {% else %}
+                                            <i class="fa fa-times text-danger"></i>
+                                        {% endif %}
+                                    </td>
+
+                                    <td data-label="Action">
+                                        <div>
+                                            <a href="{% url 'edit_users' user.id %}"><i class="fa fa-edit text-success"></i></a>
+                                            &nbsp;
+                                            <a href="{% url 'delete_users' user.id %}"><i class="fa fa-trash text-danger"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            {% else %}
+                <div class="card shadow-sm border-0 mt-4">
+                    <div class="card-body text-center">
+                        <i class="fa fa-lock fa-3x text-warning mb-3"></i>
+                        <h5 class="text-danger">Permission Denied</h5>
+                        <p class="text-muted">
+                            You don’t have permission to view this page.
+                        </p>
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm">
+                            ← Back to Home
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %} 
