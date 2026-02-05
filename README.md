@@ -27,4 +27,5 @@ It demonstrates core Django concepts such as models, views, templates, media han
 - Python  
 - Django  
 - HTML / CSS  
-- SQLite  
+- SQLite
+- Bootstrap
