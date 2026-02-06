@@ -29,3 +29,8 @@ It demonstrates core Django concepts such as models, views, templates, media han
 - HTML / CSS  
 - SQLite
 - Bootstrap
+
+
+## Preview
+Site is live at  
+https://devalex.pythonanywhere.com/
